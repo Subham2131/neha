@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Happy Birthday</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Segoe UI', sans-serif;
+}
+
+body{
+    height:100vh;
+    background: radial-gradient(circle, #0f2027, #000);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    overflow:hidden;
+    color:white;
+}
+
+/* CARD SCENE */
+.scene{
+    perspective:1200px;
+}
+
+/* CARD */
+.card{
+    width:360px;
+    height:460px;
+    position:relative;
+    transform-style:preserve-3d;
+    transition:1s;
+    cursor:pointer;
+}
+
+.card.flip{
+    transform:rotateY(180deg);
+}
+
+/* CARD FACES */
+.card-face{
+    position:absolute;
+    width:100%;
+    height:100%;
+    border-radius:25px;
+    backface-visibility:hidden;
+    box-shadow:0 0 30px #ff00ff;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    padding:20px;
+    text-align:center;
+}
+
+.front{
+    background:linear-gradient(135deg,#ff0080,#7928ca);
+}
+
+.back{
+    background:linear-gradient(135deg,#00c6ff,#0072ff);
+    transform:rotateY(180deg);
+}
+
+/* PHOTO */
+img{
+    width:140px;
+    height:140px;
+    border-radius:50%;
+    object-fit:cover;
+    border:4px solid white;
+    margin-bottom:15px;
+}
+
+/* TEXT */
+h1{
+    text-shadow:0 0 10px cyan;
+}
+
+p{
+    font-size:16px;
+    line-height:1.5;
+}
+
+/* CONFETTI */
+.confetti{
+    position:absolute;
+    width:8px;
+    height:8px;
+    animation:fall linear infinite;
+}
+
+@keyframes fall{
+    from{transform:translateY(-100px);}
+    to{transform:translateY(100vh);}
+}
+</style>
+</head>
+
+<body>
+
+<div class="scene">
+    <div class="card" onclick="flipCard()">
+
+        <!-- FRONT -->
+        <div class="card-face front">
+            <h1>🎉 Happy Birthday 🎉</h1>
+            <p>Click to open your surprise 🎁</p>
+        </div>
+
+        <!-- BACK -->
+        <div class="card-face back">
+            <img src="WhatsApp Image 2026-01-22 at 9.36.29 AM.jpeg" alt="Birthday Photo">
+            <h1>Happy Birthday, <br>✨ IAS NEHA RAJPUT ✨</h1>
+            <p>
+                May your life shine brighter than neon lights,  
+                and your year be full of success & happiness 🎂💖
+            </p>
+        </div>
+
+    </div>
+</div>
+
+<!-- YOUR SONG -->
+<audio id="music" src="Recording.m4a"></audio>
+
+<script>
+function flipCard(){
+    document.querySelector('.card').classList.toggle('flip');
+    document.getElementById("music").play();
+    startConfetti();
+}
+
+/* CONFETTI EFFECT */
+function startConfetti(){
+    for(let i=0;i<90;i++){
+        let c=document.createElement("div");
+        c.className="confetti";
+        c.style.left=Math.random()*100+"vw";
+        c.style.animationDuration=(Math.random()*3+2)+"s";
+        c.style.background=
+            `hsl(${Math.random()*360},100%,50%)`;
+        document.body.appendChild(c);
+        setTimeout(()=>c.remove(),5000);
+    }
+}
+</script>
+
+</body>
+</html>
